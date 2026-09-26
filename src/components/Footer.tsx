@@ -74,20 +74,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckout }) => {
             © {new Date().getFullYear()} Tenkart. All rights reserved. Adobe®, Lightroom®, and Photoshop® are registered trademarks of Adobe Systems Inc.
           </p>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <span>Instant Digital Delivery</span>
             <span>·</span>
             <span>Worldwide Access</span>
             <span>·</span>
             <span>Secure 256-Bit SSL</span>
-            <span>·</span>
-            <a 
-              href="?payment=success&razorpay_payment_id=pay_demo_preview"
-              className="text-neutral-500 hover:text-amber-400 transition-colors underline"
-              title="Test Order Success Page & Meta Pixel Purchase Event"
-            >
-              Demo Confirmation Page
-            </a>
           </div>
         </div>
 

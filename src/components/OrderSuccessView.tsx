@@ -11,9 +11,22 @@ import {
   ShieldCheck, 
   Mail, 
   ArrowLeft,
-  Sparkles
+  Sparkles,
+  MessageCircle,
+  Zap
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+const WhatsAppIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.03C9.34 7.03 9.04 7.1 8.79 7.37C8.54 7.64 7.84 8.29 7.84 9.63C7.84 10.97 8.81 12.26 8.95 12.45C9.09 12.64 10.99 15.56 13.9 16.82C14.59 17.12 15.13 17.3 15.55 17.43C16.25 17.65 16.88 17.62 17.38 17.55C17.94 17.47 19.11 16.85 19.35 16.16C19.6 15.48 19.6 14.89 19.52 14.77C19.45 14.65 19.25 14.58 18.96 14.44C18.66 14.3 17.21 13.58 16.94 13.48C16.67 13.38 16.47 13.33 16.28 13.63C16.08 13.92 15.5 14.6 15.33 14.8C15.15 14.99 14.98 15.01 14.69 14.87C14.4 14.72 13.46 14.41 12.35 13.42C11.48 12.65 10.9 11.7 10.75 11.45C10.61 11.21 10.74 11.08 10.88 10.94C11.01 10.81 11.17 10.6 11.32 10.43C11.46 10.26 11.51 10.14 11.61 9.95C11.71 9.75 11.66 9.58 11.58 9.44C11.51 9.3 10.93 7.85 10.68 7.27C10.44 6.7 10.2 6.78 10.03 6.77C9.87 6.76 9.7 6.76 9.53 7.03Z" />
+  </svg>
+);
 
 interface OrderSuccessViewProps {
   paymentId: string;
@@ -28,6 +41,10 @@ export const OrderSuccessView: React.FC<OrderSuccessViewProps> = ({
   const [activeGuideTab, setActiveGuideTab] = useState<'ios' | 'android' | 'desktop'>('ios');
   
   const licenseKey = `TK-6K-${paymentId.replace(/[^a-zA-Z0-9]/g, '').slice(-6).toUpperCase() || 'LR2026'}-VAULT`;
+  const whatsappNumberFormatted = '+91 78307 82683';
+  const whatsappUrl = `https://wa.me/917830782683?text=${encodeURIComponent(
+    `Hi Tenkart, I have completed the payment of ₹299 for the Master Collection (6,000+ Lightroom Presets). My Payment ID is: ${paymentId}. Please send me the download links.`
+  )}`;
 
   const handleCopyKey = () => {
     navigator.clipboard.writeText(licenseKey);
@@ -44,15 +61,18 @@ License Key: ${licenseKey}
 Amount Paid: ₹299 INR
 Access: Lifetime Unlimited
 
-YOUR CLOUD MIRROR ACCESS LINKS:
+YOUR CLOUD MIRROR & WHATSAPP ACCESS LINKS:
 -----------------------------------------------------
-1. Google Drive Cloud Vault:
+1. WhatsApp Direct Download & Support:
+   https://wa.me/917830782683 (${whatsappNumberFormatted})
+
+2. Google Drive Cloud Vault:
    https://drive.google.com/drive/folders/tenkart-master-collection-vault
 
-2. Dropbox Backup Mirror:
+3. Dropbox Backup Mirror:
    https://www.dropbox.com/sh/tenkart-master-lightroom-backup
 
-3. Direct AWS S3 Archive:
+4. Direct AWS S3 Archive:
    https://downloads.tenkart.com/vault/Tenkart_Master_6000_Presets.zip
 
 INCLUDED FOLDERS IN YOUR VAULT:
@@ -66,8 +86,8 @@ INCLUDED FOLDERS IN YOUR VAULT:
 
 CUSTOMER SUPPORT:
 -----------------------------------------------------
-Have any questions or need custom camera assistance?
-Email our team: support@tenkart.com (24/7 turnaround)
+WhatsApp: ${whatsappNumberFormatted}
+Email: support@tenkart.com (24/7 turnaround)
 30-Day 100% Money-Back Guarantee valid worldwide.
 =====================================================`;
 
@@ -159,19 +179,59 @@ Email our team: support@tenkart.com (24/7 turnaround)
 
           </div>
 
-          {/* Primary Download CTAs */}
-          <div className="mt-8 pt-8 border-t border-neutral-200 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {/* Featured WhatsApp Download Banner */}
+          <div className="mt-8 p-6 rounded-2xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-[#25D366] text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-5 relative overflow-hidden">
+            <div className="absolute right-0 top-0 translate-x-8 -translate-y-8 w-40 h-40 bg-white/10 rounded-full blur-2xl pointer-events-none" />
             
-            <button
-              onClick={handleDownloadManifest}
-              className="p-5 rounded-2xl bg-neutral-950 hover:bg-neutral-900 text-white font-bold text-sm flex flex-col items-center justify-center gap-2 shadow-lg transition-all active:scale-98 cursor-pointer text-center"
+            <div className="flex items-center gap-4 text-center sm:text-left">
+              <div className="w-14 h-14 rounded-2xl bg-white text-emerald-600 flex items-center justify-center shrink-0 shadow-md">
+                <WhatsAppIcon className="w-8 h-8 text-[#25D366]" />
+              </div>
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/20 text-white text-[11px] font-bold uppercase tracking-wider">
+                  <Zap className="w-3 h-3 fill-white" />
+                  <span>Instant 1-Click WhatsApp Delivery</span>
+                </div>
+                <h3 className="font-display text-xl sm:text-2xl font-extrabold text-white">
+                  Get Product Link on WhatsApp
+                </h3>
+                <p className="text-xs sm:text-sm text-emerald-50 max-w-xl">
+                  Message Tenkart (<strong className="text-white">{whatsappNumberFormatted}</strong>) to receive your personal Google Drive folder link directly on WhatsApp with 1-on-1 setup help!
+                </p>
+              </div>
+            </div>
+
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-6 py-3.5 bg-white hover:bg-emerald-50 text-emerald-800 font-extrabold text-sm sm:text-base rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer shrink-0"
             >
-              <DownloadCloud className="w-6 h-6 text-amber-400" />
-              <span>Download Master Vault (.ZIP)</span>
-              <span className="text-[11px] text-neutral-400 font-normal">
-                Direct High-Speed Download · 3.8 GB
+              <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
+              <span>Download via WhatsApp</span>
+            </a>
+          </div>
+
+          {/* Primary Download CTAs */}
+          <div className="mt-6 pt-6 border-t border-neutral-200 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-5 rounded-2xl bg-neutral-950 hover:bg-neutral-900 text-white font-bold text-sm flex flex-col items-center justify-center gap-2 shadow-lg transition-all active:scale-98 cursor-pointer text-center group"
+            >
+              <div className="flex items-center gap-2 text-emerald-400">
+                <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
+                <span className="text-white">WhatsApp Access</span>
+              </div>
+              <span className="text-xs text-amber-300 font-semibold">
+                {whatsappNumberFormatted}
               </span>
-            </button>
+              <span className="text-[11px] text-neutral-400 font-normal">
+                Direct Chat & Drive Link Dispatch
+              </span>
+            </a>
 
             <a
               href="https://drive.google.com"
@@ -188,20 +248,18 @@ Email our team: support@tenkart.com (24/7 turnaround)
               </span>
             </a>
 
-            <a
-              href="https://dropbox.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-5 rounded-2xl bg-white hover:bg-neutral-50 text-neutral-900 font-bold text-sm border-2 border-neutral-200 hover:border-amber-400 flex flex-col items-center justify-center gap-2 shadow-sm transition-all cursor-pointer text-center group"
+            <button
+              onClick={handleDownloadManifest}
+              className="p-5 rounded-2xl bg-white hover:bg-neutral-50 text-neutral-900 font-bold text-sm border-2 border-neutral-200 hover:border-amber-400 flex flex-col items-center justify-center gap-2 shadow-sm transition-all cursor-pointer text-center"
             >
               <div className="flex items-center gap-1.5">
-                <ExternalLink className="w-5 h-5 text-sky-600 group-hover:scale-110 transition-transform" />
-                <span>Dropbox Backup Mirror</span>
+                <DownloadCloud className="w-5 h-5 text-amber-600" />
+                <span>Download Vault Manifest (.TXT)</span>
               </div>
               <span className="text-[11px] text-neutral-500 font-normal">
-                Permanent 24/7 Cloud Backup
+                Includes All Drive & Dropbox Links
               </span>
-            </a>
+            </button>
 
           </div>
 
@@ -274,7 +332,7 @@ Email our team: support@tenkart.com (24/7 turnaround)
                   <strong className="text-neutral-950 block mb-0.5">
                     Download the Mobile .DNG Presets Folder
                   </strong>
-                  Open the Google Drive or ZIP link on your iPhone/iPad and save the DNG files directly to your Files or Camera Roll.
+                  Open the Google Drive or WhatsApp link on your iPhone/iPad and save the DNG files directly to your Files or Camera Roll.
                 </div>
               </div>
 
@@ -314,7 +372,7 @@ Email our team: support@tenkart.com (24/7 turnaround)
                   <strong className="text-neutral-950 block mb-0.5">
                     Download .DNG Files to Internal Storage
                   </strong>
-                  Tap the download link above and extract the ZIP file using your phone's File Manager.
+                  Tap the download link above or open the WhatsApp link to save the ZIP or DNG files directly to your phone.
                 </div>
               </div>
 
@@ -388,23 +446,35 @@ Email our team: support@tenkart.com (24/7 turnaround)
         {/* Support & Guarantee Footer */}
         <div className="bg-white rounded-2xl p-6 border border-neutral-200 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-left">
-            <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center shrink-0">
-              <Mail className="w-5 h-5 text-amber-900" />
+            <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+              <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
             </div>
             <div>
-              <div className="text-sm font-bold text-neutral-900">Need Help or File Backup?</div>
+              <div className="text-sm font-bold text-neutral-900">Need Help or Instant WhatsApp Link?</div>
               <div className="text-xs text-neutral-500">
-                Our team is on standby 24/7. Email us anytime at <span className="font-semibold text-neutral-800">support@tenkart.com</span>.
+                Our team is on standby 24/7 on WhatsApp (<span className="font-semibold text-neutral-800">{whatsappNumberFormatted}</span>) and <span className="font-semibold text-neutral-800">support@tenkart.com</span>.
               </div>
             </div>
           </div>
 
-          <button
-            onClick={onReturnHome}
-            className="px-6 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs sm:text-sm rounded-xl transition-colors cursor-pointer whitespace-nowrap"
-          >
-            Explore Tenkart
-          </button>
+          <div className="flex items-center gap-3">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs rounded-xl transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
+            >
+              <WhatsAppIcon className="w-4 h-4" />
+              <span>Chat on WhatsApp</span>
+            </a>
+
+            <button
+              onClick={onReturnHome}
+              className="px-5 py-2 bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer whitespace-nowrap"
+            >
+              Explore Tenkart
+            </button>
+          </div>
         </div>
 
       </div>
