@@ -1,0 +1,6 @@
+{
+  "name": "The Master Collection - 6000+ Lightroom Presets",
+  "description": "High-converting landing page for The Master Collection: 6000+ Premium Lightroom Presets for Mobile and Desktop photography enthusiasts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
