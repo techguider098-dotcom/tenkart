@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { BeforeAfterSlider } from './components/BeforeAfterSlider';
@@ -12,11 +12,50 @@ import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { PackDetailModal } from './components/PackDetailModal';
 import { StickyBottomBar } from './components/StickyBottomBar';
+import { OrderSuccessView } from './components/OrderSuccessView';
 import { PresetPack } from './types';
 import { RAZORPAY_CHECKOUT_URL } from './data/presetData';
 
 export default function App() {
   const [selectedPack, setSelectedPack] = useState<PresetPack | null>(null);
+  const [completedPaymentId, setCompletedPaymentId] = useState<string | null>(null);
+
+  // Check URL parameters on mount to detect Razorpay post-payment redirection
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const razorpayPaymentId = urlParams.get('razorpay_payment_id');
+    const paymentId = urlParams.get('payment_id');
+    const isSuccess = urlParams.get('payment') === 'success' || urlParams.get('status') === 'success';
+    const isPathSuccess = window.location.pathname === '/thank-you' || window.location.pathname === '/order-success';
+
+    if (razorpayPaymentId || paymentId || isSuccess || isPathSuccess) {
+      const activePaymentId = razorpayPaymentId || paymentId || `pay_${Math.random().toString(36).substring(2, 11)}`;
+      setCompletedPaymentId(activePaymentId);
+
+      // Track Facebook/Meta Pixel Purchase Event
+      const trackingKey = `fbq_purchase_tracked_${activePaymentId}`;
+      const hasTracked = sessionStorage.getItem(trackingKey);
+
+      if (!hasTracked && (window as any).fbq) {
+        try {
+          (window as any).fbq('track', 'Purchase', {
+            content_name: 'Tenkart Master Collection 6000+ Lightroom Presets',
+            content_type: 'product',
+            content_ids: ['tenkart-master-vault-6000'],
+            value: 299,
+            currency: 'INR',
+            order_id: activePaymentId,
+            num_items: 1,
+          });
+          sessionStorage.setItem(trackingKey, 'true');
+        } catch (err) {
+          console.error('Meta Pixel Purchase tracking error:', err);
+        }
+      }
+    }
+  }, []);
 
   const handleDownloadRedirect = () => {
     if (typeof window !== 'undefined' && (window as any).fbq) {
@@ -32,6 +71,24 @@ export default function App() {
     }
     window.location.href = RAZORPAY_CHECKOUT_URL;
   };
+
+  const handleReturnHome = () => {
+    setCompletedPaymentId(null);
+    if (typeof window !== 'undefined' && window.history) {
+      const cleanUrl = window.location.origin + window.location.pathname;
+      window.history.pushState({}, '', cleanUrl);
+    }
+  };
+
+  // If customer returned from successful Razorpay payment, render the Order Fulfillment & Download Hub
+  if (completedPaymentId) {
+    return (
+      <OrderSuccessView
+        paymentId={completedPaymentId}
+        onReturnHome={handleReturnHome}
+      />
+    );
+  }
 
   const handleSelectPack = (pack: PresetPack) => {
     setSelectedPack(pack);
