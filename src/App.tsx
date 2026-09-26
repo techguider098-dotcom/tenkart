@@ -19,6 +19,17 @@ export default function App() {
   const [selectedPack, setSelectedPack] = useState<PresetPack | null>(null);
 
   const handleDownloadRedirect = () => {
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      try {
+        (window as any).fbq('track', 'InitiateCheckout', {
+          content_name: 'Tenkart Master Collection 6000+ Lightroom Presets',
+          value: 299,
+          currency: 'INR',
+        });
+      } catch (err) {
+        // Continue to redirect regardless of adblocker/pixel state
+      }
+    }
     window.location.href = RAZORPAY_CHECKOUT_URL;
   };
 
