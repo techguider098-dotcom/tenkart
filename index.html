@@ -26,12 +26,16 @@
       fbq('init', '1411964601104802');
       fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1411964601104802&ev=PageView&noscript=1"
-    /></noscript>
     <!-- End Meta Pixel Code -->
   </head>
   <body class="bg-[#faf7f2] text-neutral-900 antialiased selection:bg-amber-500 selection:text-white">
+    <!-- Meta Pixel Fallback for No-JS -->
+    <noscript>
+      <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1411964601104802&ev=PageView&noscript=1"
+        alt=""
+      />
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

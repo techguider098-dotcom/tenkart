@@ -3,9 +3,10 @@ import { Camera, ShieldCheck, Heart } from 'lucide-react';
 
 interface FooterProps {
   onOpenCheckout: () => void;
+  onNavigateToEcomEasy?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenCheckout }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenCheckout, onNavigateToEcomEasy }) => {
   return (
     <footer className="bg-neutral-950 text-neutral-400 py-14 border-t border-neutral-800 text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,6 +37,17 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckout }) => {
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
               <span>30-Day Money-Back Guarantee · Lifetime Free Updates</span>
             </div>
+
+            {/* Featured Cross-Promotion Link */}
+            <div className="pt-2">
+              <button
+                onClick={onNavigateToEcomEasy}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-950/80 border border-emerald-700/50 text-emerald-300 hover:text-white hover:bg-emerald-900 transition-colors text-xs font-semibold cursor-pointer"
+              >
+                <span>⚡ EcomEasy: Meesho &amp; Flipkart Seller Tools (₹99)</span>
+                <span className="text-amber-400">→</span>
+              </button>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -52,12 +64,20 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckout }) => {
             </ul>
           </div>
 
-          {/* Support & Legal */}
+          {/* Support, Partner Tools & Legal */}
           <div className="space-y-2">
             <div className="font-bold text-white text-xs uppercase tracking-wider mb-2">
-              Support & Legal
+              Partner Tools & Legal
             </div>
             <ul className="space-y-2">
+              <li>
+                <button
+                  onClick={onNavigateToEcomEasy}
+                  className="text-amber-400 hover:underline font-semibold text-left transition-colors cursor-pointer"
+                >
+                  ⚡ EcomEasy Vardaan Bundle (Meesho/Flipkart)
+                </button>
+              </li>
               <li><a href="#faq" className="hover:text-white transition-colors">Frequently Asked Questions</a></li>
               <li><a href="mailto:support@tenkart.com" className="hover:text-white transition-colors">24/7 Dedicated Support (support@tenkart.com)</a></li>
               <li><span className="text-neutral-500">Privacy Policy</span></li>

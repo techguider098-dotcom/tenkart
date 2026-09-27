@@ -13,12 +13,35 @@ import { Footer } from './components/Footer';
 import { PackDetailModal } from './components/PackDetailModal';
 import { StickyBottomBar } from './components/StickyBottomBar';
 import { OrderSuccessView } from './components/OrderSuccessView';
+import { EcomEasyPage } from './components/EcomEasyPage';
 import { PresetPack } from './types';
 import { RAZORPAY_CHECKOUT_URL } from './data/presetData';
 
 export default function App() {
   const [selectedPack, setSelectedPack] = useState<PresetPack | null>(null);
   const [completedPaymentId, setCompletedPaymentId] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState<'presets' | 'ecomeasy'>(() => {
+    if (typeof window === 'undefined') return 'presets';
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('page') === 'ecomeasy' || window.location.pathname === '/ecomeasy') {
+      return 'ecomeasy';
+    }
+    return 'presets';
+  });
+
+  // Listen to browser navigation popstate
+  useEffect(() => {
+    const onPopState = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('page') === 'ecomeasy' || window.location.pathname === '/ecomeasy') {
+        setCurrentPage('ecomeasy');
+      } else {
+        setCurrentPage('presets');
+      }
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
 
   // Check URL parameters on mount to detect Razorpay post-payment redirection
   useEffect(() => {
@@ -80,6 +103,24 @@ export default function App() {
     }
   };
 
+  const handleNavigateToEcomEasy = () => {
+    setCurrentPage('ecomeasy');
+    if (typeof window !== 'undefined' && window.history) {
+      const newUrl = window.location.origin + window.location.pathname + '?page=ecomeasy';
+      window.history.pushState({ page: 'ecomeasy' }, '', newUrl);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleBackToPresets = () => {
+    setCurrentPage('presets');
+    if (typeof window !== 'undefined' && window.history) {
+      const cleanUrl = window.location.origin + window.location.pathname;
+      window.history.pushState({}, '', cleanUrl);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   // If customer returned from successful Razorpay payment, render the Order Fulfillment & Download Hub
   if (completedPaymentId) {
     return (
@@ -87,6 +128,13 @@ export default function App() {
         paymentId={completedPaymentId}
         onReturnHome={handleReturnHome}
       />
+    );
+  }
+
+  // If on EcomEasy page
+  if (currentPage === 'ecomeasy') {
+    return (
+      <EcomEasyPage onBackToPresets={handleBackToPresets} />
     );
   }
 
@@ -147,7 +195,10 @@ export default function App() {
       </main>
 
       {/* Quiet Footer */}
-      <Footer onOpenCheckout={handleDownloadRedirect} />
+      <Footer 
+        onOpenCheckout={handleDownloadRedirect} 
+        onNavigateToEcomEasy={handleNavigateToEcomEasy} 
+      />
 
       {/* Pack Detail Lightbox Modal */}
       <PackDetailModal
