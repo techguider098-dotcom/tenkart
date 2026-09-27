@@ -1,12 +1,17 @@
 import React from 'react';
-import { Camera, ShieldCheck, Heart } from 'lucide-react';
+import { Camera, ShieldCheck, Heart, MessageCircle } from 'lucide-react';
 
 interface FooterProps {
   onOpenCheckout: () => void;
   onNavigateToEcomEasy?: () => void;
+  onNavigateToEnglishEbooks?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenCheckout, onNavigateToEcomEasy }) => {
+export const Footer: React.FC<FooterProps> = ({ 
+  onOpenCheckout, 
+  onNavigateToEcomEasy,
+  onNavigateToEnglishEbooks 
+}) => {
   return (
     <footer className="bg-neutral-950 text-neutral-400 py-14 border-t border-neutral-800 text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,13 +43,21 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckout, onNavigateToEcom
               <span>30-Day Money-Back Guarantee · Lifetime Free Updates</span>
             </div>
 
-            {/* Featured Cross-Promotion Link */}
-            <div className="pt-2">
+            {/* Featured Cross-Promotion Links */}
+            <div className="pt-2 flex flex-wrap gap-2">
               <button
                 onClick={onNavigateToEcomEasy}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-950/80 border border-emerald-700/50 text-emerald-300 hover:text-white hover:bg-emerald-900 transition-colors text-xs font-semibold cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-950/80 border border-emerald-700/50 text-emerald-300 hover:text-white hover:bg-emerald-900 transition-colors text-xs font-semibold cursor-pointer"
               >
-                <span>⚡ EcomEasy: Meesho &amp; Flipkart Seller Tools (₹99)</span>
+                <span>⚡ EcomEasy: Meesho &amp; Flipkart Tools (₹99)</span>
+                <span className="text-amber-400">→</span>
+              </button>
+
+              <button
+                onClick={onNavigateToEnglishEbooks}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-950/80 border border-blue-700/50 text-blue-300 hover:text-white hover:bg-blue-900 transition-colors text-xs font-semibold cursor-pointer"
+              >
+                <span>📚 25 Spoken English E-Books + 500 Audio (₹99)</span>
                 <span className="text-amber-400">→</span>
               </button>
             </div>
@@ -67,9 +80,17 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckout, onNavigateToEcom
           {/* Support, Partner Tools & Legal */}
           <div className="space-y-2">
             <div className="font-bold text-white text-xs uppercase tracking-wider mb-2">
-              Partner Tools & Legal
+              Partner Tools &amp; Products
             </div>
             <ul className="space-y-2">
+              <li>
+                <button
+                  onClick={onNavigateToEnglishEbooks}
+                  className="text-blue-400 hover:underline font-semibold text-left transition-colors cursor-pointer"
+                >
+                  📚 25 Spoken English E-Books + 500 Audio
+                </button>
+              </li>
               <li>
                 <button
                   onClick={onNavigateToEcomEasy}
@@ -79,10 +100,20 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckout, onNavigateToEcom
                 </button>
               </li>
               <li><a href="#faq" className="hover:text-white transition-colors">Frequently Asked Questions</a></li>
+              <li className="pt-1.5 pb-1">
+                <a 
+                  href="https://wa.me/917830782683?text=Hi%2C%20I%20have%20completed%20the%20payment.%20Please%20send%20access." 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-950/80 border border-emerald-600/60 text-emerald-400 hover:bg-[#25D366] hover:text-white hover:border-[#25D366] font-bold text-xs transition-all shadow-xs"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 fill-[#25D366] group-hover:fill-white shrink-0" />
+                  <span>After Payment WhatsApp: 7830782683</span>
+                </a>
+              </li>
               <li><a href="mailto:support@tenkart.com" className="hover:text-white transition-colors">24/7 Dedicated Support (support@tenkart.com)</a></li>
               <li><span className="text-neutral-500">Privacy Policy</span></li>
               <li><span className="text-neutral-500">Terms of Service</span></li>
-              <li><span className="text-neutral-500">Refund Guarantee Terms</span></li>
             </ul>
           </div>
 

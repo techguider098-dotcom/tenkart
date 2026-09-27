@@ -16,7 +16,8 @@ import {
   Laptop, 
   CheckCircle2,
   Lock,
-  Layers
+  Layers,
+  MessageCircle
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -890,6 +891,33 @@ export const EcomEasyPage: React.FC<EcomEasyPageProps> = ({ onBackToPresets }) =
             ))}
           </div>
 
+        </div>
+      </section>
+
+      {/* 11.5 After Payment WhatsApp Support */}
+      <section className="py-10 bg-emerald-50/80 border-y border-emerald-200 text-center px-4 sm:px-6">
+        <div className="max-w-xl mx-auto space-y-3">
+          <div className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center mx-auto text-xl shadow-md">
+            <MessageCircle className="w-6 h-6 fill-white" />
+          </div>
+          
+          <h3 className="text-base sm:text-lg font-black text-[#0d3b2e]">
+            Payment Kar Liya? Click Here For Instant WhatsApp Delivery
+          </h3>
+
+          <p className="text-xs text-neutral-600">
+            Agar aapne payment kar diya hai ya koi bhi issue aa raha hai, turant WhatsApp karein:
+          </p>
+
+          <a
+            href="https://wa.me/917830782683?text=Hi%2C%20I%20have%20completed%20the%20payment%20of%20%E2%82%B999%20for%20EcomEasy%20Sachin%20Bundle.%20Please%20send%20me%20the%20access%20links."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold text-xs sm:text-sm shadow-md transition-all active:scale-95 cursor-pointer"
+          >
+            <MessageCircle className="w-4 h-4 fill-white" />
+            <span>CLICK AFTER PAYMENT — WHATSAPP 7830782683</span>
+          </a>
         </div>
       </section>
 

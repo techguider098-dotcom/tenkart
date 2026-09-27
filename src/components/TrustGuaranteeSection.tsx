@@ -7,7 +7,8 @@ import {
   RefreshCcw, 
   Mail, 
   DownloadCloud, 
-  Sparkles
+  Sparkles,
+  MessageCircle
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -121,7 +122,7 @@ export const TrustGuaranteeSection: React.FC<TrustSectionProps> = ({ onOpenCheck
                   The moment your payment of ₹299 is confirmed through Razorpay, you receive immediate on-screen access to your personal high-speed download portal. A permanent backup link is also dispatched straight to your email with Google Drive and Dropbox mirrors so you can download anytime, anywhere.
                 </p>
 
-                <div className="pt-3 flex flex-wrap items-center gap-y-1 gap-x-4 text-xs font-medium text-sky-900">
+                <div className="pt-3 flex flex-wrap items-center gap-y-1.5 gap-x-4 text-xs font-medium text-sky-900">
                   <span className="flex items-center gap-1">
                     <DownloadCloud className="w-3.5 h-3.5 text-[#0084ff] shrink-0" />
                     Instant Google Drive link
@@ -130,10 +131,15 @@ export const TrustGuaranteeSection: React.FC<TrustSectionProps> = ({ onOpenCheck
                     <Mail className="w-3.5 h-3.5 text-[#0084ff] shrink-0" />
                     Email backup dispatch
                   </span>
-                  <span className="flex items-center gap-1">
-                    <RefreshCcw className="w-3.5 h-3.5 text-[#0084ff] shrink-0" />
-                    Lifetime unlimited re-downloads
-                  </span>
+                  <a
+                    href="https://wa.me/917830782683?text=Hi%2C%20I%20have%20completed%20the%20payment%20for%20Tenkart%20Presets.%20Please%20send%20access."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-emerald-700 hover:text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 transition-colors"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5 fill-[#25D366] text-[#25D366] shrink-0" />
+                    <span>WhatsApp After Payment: 7830782683</span>
+                  </a>
                 </div>
               </div>
             </div>

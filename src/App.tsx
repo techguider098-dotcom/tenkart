@@ -14,16 +14,21 @@ import { PackDetailModal } from './components/PackDetailModal';
 import { StickyBottomBar } from './components/StickyBottomBar';
 import { OrderSuccessView } from './components/OrderSuccessView';
 import { EcomEasyPage } from './components/EcomEasyPage';
+import { EnglishEbooksPage } from './components/EnglishEbooksPage';
 import { PresetPack } from './types';
 import { RAZORPAY_CHECKOUT_URL } from './data/presetData';
 
 export default function App() {
   const [selectedPack, setSelectedPack] = useState<PresetPack | null>(null);
   const [completedPaymentId, setCompletedPaymentId] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState<'presets' | 'ecomeasy'>(() => {
+  const [currentPage, setCurrentPage] = useState<'presets' | 'ecomeasy' | 'english-ebooks'>(() => {
     if (typeof window === 'undefined') return 'presets';
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('page') === 'ecomeasy' || window.location.pathname === '/ecomeasy') {
+    const pageParam = urlParams.get('page');
+    if (pageParam === 'english-ebooks' || pageParam === 'ebooks' || window.location.pathname.includes('english')) {
+      return 'english-ebooks';
+    }
+    if (pageParam === 'ecomeasy' || window.location.pathname === '/ecomeasy') {
       return 'ecomeasy';
     }
     return 'presets';
@@ -33,7 +38,10 @@ export default function App() {
   useEffect(() => {
     const onPopState = () => {
       const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('page') === 'ecomeasy' || window.location.pathname === '/ecomeasy') {
+      const pageParam = urlParams.get('page');
+      if (pageParam === 'english-ebooks' || pageParam === 'ebooks' || window.location.pathname.includes('english')) {
+        setCurrentPage('english-ebooks');
+      } else if (pageParam === 'ecomeasy' || window.location.pathname === '/ecomeasy') {
         setCurrentPage('ecomeasy');
       } else {
         setCurrentPage('presets');
@@ -112,6 +120,15 @@ export default function App() {
     }
   };
 
+  const handleNavigateToEnglishEbooks = () => {
+    setCurrentPage('english-ebooks');
+    if (typeof window !== 'undefined' && window.history) {
+      const newUrl = window.location.origin + window.location.pathname + '?page=english-ebooks';
+      window.history.pushState({ page: 'english-ebooks' }, '', newUrl);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const handleBackToPresets = () => {
     setCurrentPage('presets');
     if (typeof window !== 'undefined' && window.history) {
@@ -128,6 +145,13 @@ export default function App() {
         paymentId={completedPaymentId}
         onReturnHome={handleReturnHome}
       />
+    );
+  }
+
+  // If on English Ebooks page
+  if (currentPage === 'english-ebooks') {
+    return (
+      <EnglishEbooksPage onBackToHome={handleBackToPresets} />
     );
   }
 
@@ -198,6 +222,7 @@ export default function App() {
       <Footer 
         onOpenCheckout={handleDownloadRedirect} 
         onNavigateToEcomEasy={handleNavigateToEcomEasy} 
+        onNavigateToEnglishEbooks={handleNavigateToEnglishEbooks}
       />
 
       {/* Pack Detail Lightbox Modal */}
