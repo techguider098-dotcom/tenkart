@@ -75,7 +75,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckout, onNavigateToEcom
                   onClick={onNavigateToEcomEasy}
                   className="text-amber-400 hover:underline font-semibold text-left transition-colors cursor-pointer"
                 >
-                  ⚡ EcomEasy Vardaan Bundle (Meesho/Flipkart)
+                  ⚡ EcomEasy Sachin Bundle (Meesho/Flipkart)
                 </button>
               </li>
               <li><a href="#faq" className="hover:text-white transition-colors">Frequently Asked Questions</a></li>

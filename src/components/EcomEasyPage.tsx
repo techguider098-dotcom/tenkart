@@ -94,7 +94,7 @@ export const EcomEasyPage: React.FC<EcomEasyPageProps> = ({ onBackToPresets }) =
     if (typeof window !== 'undefined' && (window as any).fbq) {
       try {
         (window as any).fbq('track', 'InitiateCheckout', {
-          content_name: 'EcomEasy Vardaan Bundle Pack (4 Tools + 3 Bonus)',
+          content_name: 'EcomEasy Sachin Bundle Pack (4 Tools + 3 Bonus)',
           value: 99,
           currency: 'INR',
         });
@@ -118,7 +118,7 @@ export const EcomEasyPage: React.FC<EcomEasyPageProps> = ({ onBackToPresets }) =
       <div className="bg-gradient-to-r from-[#0a2620] via-[#0d3b2e] to-[#124832] text-[#f3e2b3] text-xs font-semibold py-2 px-4 text-center border-b border-emerald-950 flex items-center justify-center gap-2">
         <Sparkles className="w-3.5 h-3.5 text-[#c9952d] shrink-0" />
         <span>
-          🎁 Vardaan Bundle Pack Special: <strong className="text-white font-bold">₹99 Only</strong> (Save 98%) · Lifetime Validity · 4 Tools + 3 Bonus Gifts Ek Saath
+          🎁 Sachin Bundle Pack Special: <strong className="text-white font-bold">₹99 Only</strong> (Save 98%) · Lifetime Validity · 4 Tools + 3 Bonus Gifts Ek Saath
         </span>
       </div>
 
@@ -146,7 +146,7 @@ export const EcomEasyPage: React.FC<EcomEasyPageProps> = ({ onBackToPresets }) =
               </div>
               <div>
                 <span className="font-extrabold text-base tracking-tight text-[#0d3b2e]">
-                  ECOMEASY<span className="text-[#c9952d]">VARDAAN</span>
+                  ECOMEASY<span className="text-[#c9952d]">SACHIN</span>
                 </span>
                 <span className="text-[10px] text-neutral-400 font-mono block leading-none">
                   ecomeasy.store
@@ -174,7 +174,7 @@ export const EcomEasyPage: React.FC<EcomEasyPageProps> = ({ onBackToPresets }) =
           
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#e2efe8] border border-[#1d5c47]/20 text-[#1d5c47] text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5 text-[#c9952d]" />
-            <span>ecomeasy · Vardaan Bundle Pack</span>
+            <span>ecomeasy · Sachin Bundle Pack</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0d3b2e] tracking-tight leading-tight">
@@ -183,7 +183,7 @@ export const EcomEasyPage: React.FC<EcomEasyPageProps> = ({ onBackToPresets }) =
           </h1>
 
           <p className="text-sm sm:text-base text-neutral-700 max-w-2xl mx-auto leading-relaxed">
-            Meesho aur Flipkart par listing, shipping aur competitor research — sab kuch ek click mein. Vardaan Bundle ke 4 tools se apna selling kaam fast, easy aur profitable banao.
+            Meesho aur Flipkart par listing, shipping aur competitor research — sab kuch ek click mein. Sachin Bundle ke 4 tools se apna selling kaam fast, easy aur profitable banao.
           </p>
 
           {/* Social Proof Star Bar */}
@@ -222,7 +222,7 @@ export const EcomEasyPage: React.FC<EcomEasyPageProps> = ({ onBackToPresets }) =
                 </div>
                 <div className="bg-white/5 px-3 py-1 rounded text-[11px] font-mono text-[#9fc2b3] flex items-center gap-1.5">
                   <Zap className="w-3 h-3 text-amber-400" />
-                  <span>ecomeasy.store/vardaan-bundle</span>
+                  <span>ecomeasy.store/sachin-bundle</span>
                 </div>
               </div>
 
@@ -358,7 +358,7 @@ export const EcomEasyPage: React.FC<EcomEasyPageProps> = ({ onBackToPresets }) =
               3 Bonus Gifts — Bundle Ke Sath
             </h2>
             <p className="text-xs sm:text-sm text-neutral-600 max-w-xl mx-auto">
-              Ye teeno bonuses sirf Vardaan Bundle buyers ko completely free milte hain.
+              Ye teeno bonuses sirf Sachin Bundle buyers ko completely free milte hain.
             </p>
           </div>
 
@@ -414,14 +414,14 @@ export const EcomEasyPage: React.FC<EcomEasyPageProps> = ({ onBackToPresets }) =
         </div>
       </section>
 
-      {/* 6. Comparison: Manual vs Vardaan Bundle */}
+      {/* 6. Comparison: Manual vs Sachin Bundle */}
       <section className="py-14 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <div className="text-center space-y-2 mb-8">
           <span className="text-xs font-bold uppercase tracking-wider text-[#c9952d]">
             Compare karo
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0d3b2e]">
-            Manual vs Vardaan Bundle — Khud Dekho Farak
+            Manual vs Sachin Bundle — Khud Dekho Farak
           </h2>
         </div>
 
@@ -651,7 +651,7 @@ export const EcomEasyPage: React.FC<EcomEasyPageProps> = ({ onBackToPresets }) =
         <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#e1ddd0] shadow-md font-mono text-xs space-y-5">
           <div className="text-center pb-2 border-b border-dashed border-neutral-300">
             <span className="font-bold text-sm tracking-wider text-[#0d3b2e] block">
-              ECOMEASY VARDAAN · ROI ESTIMATE
+              ECOMEASY SACHIN · ROI ESTIMATE
             </span>
             <span className="text-[10px] text-neutral-500">Official Seller Productivity Audit</span>
           </div>
@@ -900,7 +900,7 @@ export const EcomEasyPage: React.FC<EcomEasyPageProps> = ({ onBackToPresets }) =
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-white/10">
             <div>
               <span className="font-extrabold text-base tracking-tight text-white block">
-                ECOMEASY<span className="text-[#c9952d]">VARDAAN</span>
+                ECOMEASY<span className="text-[#c9952d]">SACHIN</span>
               </span>
               <p className="text-[11px] text-neutral-400">
                 Helping Meesho and Flipkart sellers scale with automated tools.
@@ -933,7 +933,7 @@ export const EcomEasyPage: React.FC<EcomEasyPageProps> = ({ onBackToPresets }) =
       {/* 13. Sticky Bottom Bar on Mobile (Without Pucho Button) */}
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-neutral-200 p-3 sm:hidden shadow-lg flex items-center justify-between">
         <div>
-          <span className="text-xs text-neutral-500 block leading-tight">Vardaan Bundle</span>
+          <span className="text-xs text-neutral-500 block leading-tight">Sachin Bundle</span>
           <span className="text-base font-extrabold text-[#0d3b2e]">₹99 Only</span>
         </div>
 
